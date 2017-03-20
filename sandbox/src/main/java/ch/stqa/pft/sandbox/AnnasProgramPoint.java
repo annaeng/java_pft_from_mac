@@ -5,9 +5,9 @@ public class AnnasProgramPoint {
   public static void main(String[] args) {
     //distance(5, 3);
     // в круглых скобках значения которые передаются в параметры функции distance
-    double pen1 = 5;
-    double pen2 = 3;
-    System.out.println("Расстояние между точками = " + distance (pen1, pen2) );
+    double p1 = 5;
+    double p2 = 3;
+    System.out.println("Расстояние между точками " + p1 + " и " + p2 + " равно " + distance (p1, p2) );
 
   }
 
