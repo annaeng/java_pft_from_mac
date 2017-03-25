@@ -2,3 +2,11 @@ apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "AnnasSecondProgram"
 mainClassName = "AnnasProgramPoint"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.testng:testng:6.11'
+}
