@@ -35,7 +35,7 @@ public class GroupCreationTest {
 
     goToGroupPage();
     initGroupCreation();
-    fillGroupCreation(new GroupData("о, святые печеньки7!", "о, святые печеньки7!", "о, святые печеньки7!"));
+    fillGroupCreation(new GroupData("о, святые печеньки9!", "о, святые печеньки9!", "о, святые печеньки9!"));
     submitGroupCreation();
     returnToGroupPage();
   }
