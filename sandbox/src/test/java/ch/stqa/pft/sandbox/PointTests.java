@@ -1,7 +1,9 @@
 package ch.stqa.pft.sandbox;
 
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 /**
  * Created by annaryapolova on 25.03.17.
@@ -12,7 +14,6 @@ public class PointTests {
   public void testDistance(){
 
     Point p1 = new Point(2,6);
-    Point p2 = new Point(4,3);
 
     Assert.assertEquals(p1.distance(p2), 3.605551275463989);
   }
