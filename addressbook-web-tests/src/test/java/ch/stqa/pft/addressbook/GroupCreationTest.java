@@ -10,7 +10,7 @@ public class GroupCreationTest extends TestBase {
 
     goToGroupPage();
     initGroupCreation();
-    fillGroupCreation(new GroupData("о, святые печеньки10!", "о, святые печеньки10!", "о, святые печеньки10!"));
+    fillGroupCreation(new GroupData("о, святые печеньки11!", "о, святые печеньки11!", "о, святые печеньки11!"));
     submitGroupCreation();
     returnToGroupPage();
   }
