@@ -36,6 +36,7 @@ public class ApplicationManager {
   // тест
   // убираю тест
   //возвращаю текст
+  //убираю тест
 
 
   private void login(String username, String password) {
