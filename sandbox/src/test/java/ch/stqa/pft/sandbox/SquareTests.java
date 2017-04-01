@@ -13,7 +13,7 @@ public class SquareTests {
   //аннотация для FW что это тест, вверху появляется import
   @Test
   public void testArea() {
-    // создаем новый квадрат со стороной 5
+    // создаем новый квадрат со стороной (параметром) 5
     Square s = new Square(5);
     //спец вспомогат класс Assert
     Assert.assertEquals(s.area(), 25.0);
