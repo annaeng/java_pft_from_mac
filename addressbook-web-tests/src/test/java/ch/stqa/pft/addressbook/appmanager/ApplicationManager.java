@@ -32,6 +32,7 @@ public class ApplicationManager {
   // и не знаю куда он созраняет вот это все
   // вообще не знаю
   // heeeelp!   урррррраааааа!
+  // еще раз!
 
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
