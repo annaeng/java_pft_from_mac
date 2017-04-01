@@ -39,9 +39,11 @@ public class DeleteContact {
     wd.findElement(By.name("selected[]")).click();
     wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
 
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     wd.switchTo().alert().accept();
-    wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
-    wd.findElement(By.name("ok")).click();
+    
+    //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+    //wd.findElement(By.name("ok")).click();
     //wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
 
   }
