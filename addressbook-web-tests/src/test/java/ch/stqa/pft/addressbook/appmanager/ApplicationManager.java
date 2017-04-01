@@ -28,6 +28,9 @@ public class ApplicationManager {
     wd.get("http://localhost/addressbook/index.php");
     login("admin", "secret");
   }
+//я не знаю как и куда поставить паузу
+  // и не знаю куда он созраняет вот это все
+  // вообще не знаю
 
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
