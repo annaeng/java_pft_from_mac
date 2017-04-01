@@ -31,7 +31,7 @@ public class ApplicationManager {
 //я не знаю как и куда поставить паузу
   // и не знаю куда он созраняет вот это все
   // вообще не знаю
-  // heeeelp!
+  // heeeelp!   урррррраааааа!
 
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
