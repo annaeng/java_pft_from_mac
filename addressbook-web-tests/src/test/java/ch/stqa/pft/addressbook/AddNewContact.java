@@ -33,7 +33,7 @@ public class AddNewContact {
     public void testAddNewContact() {
 
         goToAddNewContact();
-        fillNewContact(new ContactData("FN3", "LN3", "Happy st.3", "33333333333"));
+        fillNewContact(new ContactData("FN5", "LN5", "Happy st.5", "55555555555"));
         submitNewContact();
         goToHomePage();
     }

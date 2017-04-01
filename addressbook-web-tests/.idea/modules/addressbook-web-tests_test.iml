@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="addressbook-web-tests:main" external.linked.project.path="$MODULE_DIR$/../../addressbook-web-tests" external.root.project.path="$MODULE_DIR$/../../addressbook-web-tests" external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="addressbook-web-tests:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../../addressbook-web-tests/build/classes/main" />
+    <output-test url="file://$MODULE_DIR$/../../build/classes/test" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../addressbook-web-tests/src/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/main/java" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/../../src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/test/resources" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="addressbook-web-tests_main" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.testng:testng:6.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.seleniumhq.selenium:selenium-java:3.3.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.webjars.bower:marionette:3.2.0" level="project" />
@@ -57,4 +58,5 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.dev.jna:jna-platform:4.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: net.java.dev.jna:jna:4.1.0" level="project" />
   </component>
+  <component name="TestModuleProperties" production-module="addressbook-web-tests_main" />
 </module>
