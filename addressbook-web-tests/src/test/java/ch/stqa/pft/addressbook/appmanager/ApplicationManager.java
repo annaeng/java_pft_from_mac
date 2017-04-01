@@ -36,8 +36,7 @@ public class ApplicationManager {
   // тест
   // убираю тест
   //возвращаю текст
-  //еще раз добавляю
-  
+
 
   private void login(String username, String password) {
     wd.findElement(By.name("user")).click();
