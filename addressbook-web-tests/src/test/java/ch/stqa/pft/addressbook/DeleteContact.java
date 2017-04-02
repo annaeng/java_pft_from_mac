@@ -24,10 +24,6 @@ public class DeleteContact {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testDeleteContact() {
     wd.get("http://localhost/addressbook/index.php");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
@@ -36,6 +32,12 @@ public class DeleteContact {
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+  }
+
+  @Test
+  public void testDeleteContact() {
+
+
     wd.findElement(By.name("selected[]")).click();
     wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
 
