@@ -1,9 +1,7 @@
 package ch.stqa.pft.addressbook.appmanager;
 
-import ch.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -14,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   FirefoxDriver wd;
 
-
+  private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
@@ -33,6 +31,7 @@ public class ApplicationManager {
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
+    contactHelper = new ContactHelper(wd);
     login("admin", "secret");
   }
 
@@ -46,44 +45,10 @@ public class ApplicationManager {
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
-
   public void stop() {
     wd.quit();
   }
 
-
-  public void submitNewContact() {
-      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-  }
-
-  public void fillNewContact(ContactData contactData) {
-      wd.findElement(By.name("firstname")).click();
-      wd.findElement(By.name("firstname")).clear();
-      wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-      wd.findElement(By.name("lastname")).click();
-      wd.findElement(By.name("lastname")).clear();
-      wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-      wd.findElement(By.name("address")).click();
-      wd.findElement(By.name("address")).clear();
-      wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-      wd.findElement(By.name("mobile")).click();
-      wd.findElement(By.name("mobile")).clear();
-      wd.findElement(By.name("mobile")).sendKeys(contactData.getMobil());
-  }
-
-  public void confirmContactDeletion() {
-    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
-    wd.switchTo().alert().accept();
-  }
-
-  public void deleteContact() {
-    wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
-  }
-
-  public void selectContact() {
-    groupHelper.selectGroup();
-    //после выделения GroupHelper подставилось почему то Group
-  }
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
@@ -91,5 +56,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
   }
 }
