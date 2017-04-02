@@ -3,6 +3,7 @@ package ch.stqa.pft.addressbook.appmanager;
 import ch.stqa.pft.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -39,12 +40,8 @@ public class ApplicationManager {
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
-  public void returnToGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
-  }
-
-  public void submitGroupCreation() {
-    wd.findElement(By.name("submit")).click();
+  public void initGroupCreation() {
+    wd.findElement(By.name("new")).click();
   }
 
   public void fillGroupCreation(GroupData groupData) {
@@ -59,21 +56,38 @@ public class ApplicationManager {
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
   }
 
-  public void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
+  public void submitGroupCreation() {
+    wd.findElement(By.name("submit")).click();
   }
 
   public void goToGroupPage() {
     wd.findElement(By.linkText("groups")).click();
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+  }
+
+  public void selectGroup()  {
+
+    wd.findElement(By.name("selected[]")).click();
+    //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+  }
+
+  public void deleteSelectedGroups() {
+    wd.findElement(By.name("delete")).click();
+    //wd.findElement(By.xpath("//div[@id='content']/form/input[2]"));
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+    wd.findElement(By.linkText("group page"));
+  }
+
+  public void returnToGroupPage() {
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+    wd.findElement(By.linkText("group page"));
+    wd.findElement(By.linkText("group page")).click();
+
   }
 
   public void stop() {
     wd.quit();
   }
 
-  public void deleteSelectedGroups() {
-    wd.findElement(By.name("delete")).click();
-  }
 
-  public void selectGroup()  {wd.findElement(By.name("selected[]")).click();}
 }
