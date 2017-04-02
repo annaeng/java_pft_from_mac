@@ -8,10 +8,10 @@ public class AddNewContactTest extends TestBase {
     @Test
     public void testAddNewContact() {
 
-        app.goToAddNewContact();
+        app.getNavigationHelper().goToAddNewContact();
         app.fillNewContact(new ContactData("FN77", "LN77", "Happy st.77", "777777777"));
         app.submitNewContact();
-        app.goToHomePage();
+        app.getNavigationHelper().goToHomePage();
     }
 
 }

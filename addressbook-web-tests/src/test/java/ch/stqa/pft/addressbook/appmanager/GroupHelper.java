@@ -20,6 +20,7 @@ public class GroupHelper {
 
   public void initGroupCreation() {
     wd.findElement(By.name("new")).click();
+
   }
 
   public void fillGroupCreation(GroupData groupData) {

@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   FirefoxDriver wd;
 
+
+  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -30,6 +32,7 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
     login("admin", "secret");
   }
 
@@ -44,20 +47,10 @@ public class ApplicationManager {
   }
 
 
-  public void goToGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
-    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
-  }
-
-
   public void stop() {
     wd.quit();
   }
 
-
-  public void goToHomePage() {
-      wd.findElement(By.linkText("home page")).click();
-  }
 
   public void submitNewContact() {
       wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
@@ -78,10 +71,6 @@ public class ApplicationManager {
       wd.findElement(By.name("mobile")).sendKeys(contactData.getMobil());
   }
 
-  public void goToAddNewContact() {
-      wd.findElement(By.linkText("add new")).click();
-  }
-
   public void confirmContactDeletion() {
     WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     wd.switchTo().alert().accept();
@@ -98,5 +87,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
