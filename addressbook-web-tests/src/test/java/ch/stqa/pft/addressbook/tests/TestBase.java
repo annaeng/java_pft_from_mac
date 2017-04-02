@@ -9,7 +9,8 @@ import org.testng.annotations.BeforeMethod;
  */
 public class TestBase {
 
-  protected final ApplicationManager app = new ApplicationManager();
+  public final ApplicationManager app = new ApplicationManager();
+  // не знаю оставить или убрать: protected final ApplicationManager applicationManager = new ApplicationManager();
 
   @BeforeMethod
   public void setUp() throws Exception {
@@ -20,5 +21,6 @@ public class TestBase {
   public void tearDown() {
     app.stop();
   }
+
 
 }

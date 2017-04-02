@@ -1,17 +1,19 @@
 package ch.stqa.pft.addressbook.appmanager;
 
+import ch.stqa.pft.addressbook.model.ContactData;
 import ch.stqa.pft.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.internal.MethodGroupsHelper;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by annaryapolova on 27.03.17.
  */
-public class ApplicationManager {
+public class ApplicationManager extends {
   FirefoxDriver wd;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -39,6 +41,8 @@ public class ApplicationManager {
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
+
+
 
   public void initGroupCreation() {
     wd.findElement(By.name("new")).click();
@@ -85,9 +89,50 @@ public class ApplicationManager {
 
   }
 
+
+
   public void stop() {
     wd.quit();
   }
 
 
+  public void goToHomePage() {
+      wd.findElement(By.linkText("home page")).click();
+  }
+
+  public void submitNewContact() {
+      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+  }
+
+  public void fillNewContact(ContactData contactData) {
+      wd.findElement(By.name("firstname")).click();
+      wd.findElement(By.name("firstname")).clear();
+      wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+      wd.findElement(By.name("lastname")).click();
+      wd.findElement(By.name("lastname")).clear();
+      wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+      wd.findElement(By.name("address")).click();
+      wd.findElement(By.name("address")).clear();
+      wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
+      wd.findElement(By.name("mobile")).click();
+      wd.findElement(By.name("mobile")).clear();
+      wd.findElement(By.name("mobile")).sendKeys(contactData.getMobil());
+  }
+
+  public void goToAddNewContact() {
+      wd.findElement(By.linkText("add new")).click();
+  }
+
+  public void confirmContactDeletion() {
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+    wd.switchTo().alert().accept();
+  }
+
+  public void deleteContact() {
+    wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
+  }
+
+  public void selectContact() {
+    wd.findElement(By.name("selected[]")).click();
+  }
 }
