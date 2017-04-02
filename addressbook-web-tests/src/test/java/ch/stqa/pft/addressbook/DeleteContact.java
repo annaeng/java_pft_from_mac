@@ -41,7 +41,7 @@ public class DeleteContact {
 
     WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     wd.switchTo().alert().accept();
-    
+
     //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     //wd.findElement(By.name("ok")).click();
     //wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
