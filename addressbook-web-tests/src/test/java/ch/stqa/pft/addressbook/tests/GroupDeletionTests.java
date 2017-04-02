@@ -1,6 +1,9 @@
 package ch.stqa.pft.addressbook.tests;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 public class GroupDeletionTests extends TestBase {
 
