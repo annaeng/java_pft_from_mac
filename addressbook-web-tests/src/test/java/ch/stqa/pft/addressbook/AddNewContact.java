@@ -37,7 +37,6 @@ public class AddNewContact {
         submitNewContact();
         goToHomePage();
     }
-
     private void goToHomePage() {
         wd.findElement(By.linkText("home page")).click();
     }
@@ -58,6 +57,7 @@ public class AddNewContact {
         wd.findElement(By.name("mobile")).clear();
         wd.findElement(By.name("mobile")).sendKeys(contactData.getMobil());
     }
+
     private void goToAddNewContact() {
         wd.findElement(By.linkText("add new")).click();
     }
@@ -66,7 +66,6 @@ public class AddNewContact {
     public void tearDown() {
         wd.quit();
     }
-    
     public static boolean isAlertPresent(FirefoxDriver wd) {
         try {
             wd.switchTo().alert();
