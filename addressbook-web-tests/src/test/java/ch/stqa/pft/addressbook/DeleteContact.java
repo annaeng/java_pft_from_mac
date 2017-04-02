@@ -25,6 +25,10 @@ public class DeleteContact {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
+    login();
+  }
+
+  private void login() {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
@@ -38,16 +42,28 @@ public class DeleteContact {
   public void testDeleteContact() {
 
 
-    wd.findElement(By.name("selected[]")).click();
-    wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
+    selectContact();
+    deleteContact();
 
-    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
-    wd.switchTo().alert().accept();
+    confirmContactDeletion();
 
     //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
     //wd.findElement(By.name("ok")).click();
     //wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
 
+  }
+
+  private void confirmContactDeletion() {
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
+    wd.switchTo().alert().accept();
+  }
+
+  private void deleteContact() {
+    wd.findElement(By.xpath("//div/div[4]/form[2]/div[2]/input")).click();
+  }
+
+  private void selectContact() {
+    wd.findElement(By.name("selected[]")).click();
   }
 
 
