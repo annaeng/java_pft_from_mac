@@ -49,6 +49,13 @@ public class GroupHelper extends HelperBase {
     WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
     wd.findElement(By.linkText("group page"));
     click(By.linkText("group page"));
+  }
 
+  public void initGroupModification() {
+    click(By.name("edit"));
+  }
+
+  public void submitGroupModification() {
+    click(By.name("update"));
   }
 }
