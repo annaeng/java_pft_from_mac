@@ -9,26 +9,23 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by annaryapolova on 02.04.17.
  */
-public class NavigationHelper {
-
-
-  private FirefoxDriver wd;
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(FirefoxDriver wd) {
-    this.wd = wd;
+    super (wd);
   }
 
   public void goToGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    click(By.linkText("groups"));
     WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
   }
 
   public void goToHomePage() {
-      wd.findElement(By.linkText("home page")).click();
+      click(By.linkText("home page"));
   }
 
   public void goToAddNewContact() {
-      wd.findElement(By.linkText("add new")).click();
+      click(By.linkText("add new"));
   }
 }
 
