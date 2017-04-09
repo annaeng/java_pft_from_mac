@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class NavigationHelper extends HelperBase {
 
-  public NavigationHelper(FirefoxDriver wd) {super (wd);
+  public NavigationHelper(WebDriver wd) {super (wd);
   }
 
   public void goToGroupPage() {

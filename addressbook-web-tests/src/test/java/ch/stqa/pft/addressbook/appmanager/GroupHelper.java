@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class GroupHelper extends HelperBase {
 
-  public GroupHelper(FirefoxDriver wd) {
+  public GroupHelper(WebDriver wd) {
     super(wd);
 
   }

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
