@@ -9,7 +9,7 @@ public class AddNewContactTest extends TestBase {
     public void testAddNewContact() {
 
         app.getNavigationHelper().goToAddNewContact();
-        app.getContactHelper().fillNewContact(new ContactData("FN77", null, "Happy st.77", "777777777"));
+        app.getContactHelper().fillNewContact(new ContactData("FN77", null, "Happy st.77", "777777777", "о, святые печеньки1"), true );
         app.getContactHelper().submitNewContact();
         app.getNavigationHelper().goToHomePage();
     }
