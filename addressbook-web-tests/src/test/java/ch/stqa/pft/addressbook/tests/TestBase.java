@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
  */
 public class TestBase {
 
-  public final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  public final ApplicationManager app = new ApplicationManager(BrowserType.SAFARI);
 
   @BeforeMethod
   public void setUp() throws Exception {
