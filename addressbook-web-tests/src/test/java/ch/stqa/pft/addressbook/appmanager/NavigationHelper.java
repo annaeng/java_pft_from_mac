@@ -25,18 +25,7 @@ public class NavigationHelper extends HelperBase {
 
     //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
 
-  public void goToHomePage() {
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    }
-      click(By.linkText("home page"));
-  }
 
-  public void goToAddNewContact() {
-    if (isElementPresent(By.name("submit"))) {
-      return;
-    }
-      click(By.linkText("add new"));
-  }
+
 }
 
