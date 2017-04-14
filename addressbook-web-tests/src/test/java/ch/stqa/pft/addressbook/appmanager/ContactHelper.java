@@ -57,7 +57,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void updateContact() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
-
+    WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
   }
 
   public void goToAddNewContact() {
@@ -83,5 +83,9 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getGroupCount() {
+   return wd.findElements(By.name("selected[]")).size();
   }
 }
