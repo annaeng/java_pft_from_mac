@@ -94,16 +94,16 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts= new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements( By.name("selected[]") );
-    //List<WebElement> elements = wd.findElements( By.xpath("//table[@id='maintable']/tbody/tr[*]") );
-    //считает количество записей в таблице вместе с заголовком, но это ничего страшного. просто не очень элегантно, позже найду другие локаторы
+    List<WebElement> elements = wd.findElements( By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']") );
+
     for (WebElement element : elements) {
-      String name = element.getText();
-      ContactData contact = new ContactData(name, null, null, null, null);
+      //String firstname = element.findElement( By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']/td[3]")).getText();
+      String id = element.findElement(By.xpath( "//table[@id='maintable']/tbody/tr[@name='entry']/td[@class='center']")).getAttribute("value");
+      ContactData contact = new ContactData(id, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
   }
 }
-//*[@id="49"]
+
 
