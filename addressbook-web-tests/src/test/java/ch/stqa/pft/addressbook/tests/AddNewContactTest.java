@@ -14,14 +14,16 @@ public class AddNewContactTest extends TestBase {
   public void testAddNewContact() {
 
     List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData contact = new ContactData("FN88", null, "Happy st.77", "777777777", "о, святые печеньки1");
+    ContactData contact = new ContactData("FN1", "LN1", "Happy st.1", "1111", "о, святые печеньки1");
     app.getContactHelper().createContact(contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    contact.setId(after.stream().max((Comparator<ContactData>)(o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(),g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
 
   }
