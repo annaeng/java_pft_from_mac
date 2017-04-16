@@ -23,7 +23,7 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification () {
 
-    //app.getNavigationHelper().goToHomePage();
+    //app.goTo().goToHomePage();
 
     List<ContactData> before = app.getContactHelper().getContactList();
     int index = before.size() - 1;
