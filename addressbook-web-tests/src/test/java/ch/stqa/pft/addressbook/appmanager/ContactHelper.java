@@ -2,10 +2,8 @@ package ch.stqa.pft.addressbook.appmanager;
 
 import ch.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -90,7 +88,6 @@ public class ContactHelper extends HelperBase {
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
-
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts= new ArrayList<ContactData>();
