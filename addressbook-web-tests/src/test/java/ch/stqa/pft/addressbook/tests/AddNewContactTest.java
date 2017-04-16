@@ -12,10 +12,10 @@ public class AddNewContactTest extends TestBase {
   @Test
   public void testAddNewContact() {
 
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("FN1", "LN1", "Happy st.1", "1111", "о, святые печеньки1");
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(contact);
@@ -23,8 +23,7 @@ public class AddNewContactTest extends TestBase {
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
-
-
+    
   }
 
 }
