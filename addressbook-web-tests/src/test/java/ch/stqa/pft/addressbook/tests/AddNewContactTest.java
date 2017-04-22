@@ -13,7 +13,8 @@ public class AddNewContactTest extends TestBase {
   public void testAddNewContact() {
 
     List<ContactData> before = app.contact().list();
-    ContactData contact = new ContactData("FN1", "LN1", "Happy st.1", "1111", "о, святые печеньки1");
+    ContactData contact = new ContactData().
+            withFirstname("FN1").withLastname("LN1").withAddress("Happy st.1").withMobil("1111").withGroup("о, святые печеньки1");
     app.contact().create(contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
@@ -25,5 +26,6 @@ public class AddNewContactTest extends TestBase {
     Assert.assertEquals(before, after);
 
   }
+
 
 }
