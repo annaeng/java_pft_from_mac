@@ -11,6 +11,57 @@ public class ContactData {
   private String homePhone;
   private String mobilePhone;
   private String workPhone;
+  private String allPhones;
+  private String new_adress;
+  private String email1;
+  private String email2;
+  private String email3;
+  private String allEmails;
+
+  public ContactData withEmail1(String email1) {
+    this.email1 = email1;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public String getEmail1() {
+    return email1;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withNew_adress(String new_adress) {
+    this.new_adress = new_adress;
+    return this;
+  }
+  public String getNew_adress() {
+    return new_adress;
+  }
 
   public String getAllPhones() {
     return allPhones;
@@ -21,7 +72,6 @@ public class ContactData {
     return this;
   }
 
-  private String allPhones;
 
 
   public String getWorkPhone() { return workPhone; }
