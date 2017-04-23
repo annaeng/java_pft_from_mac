@@ -35,7 +35,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.getMobil());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+     // new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -100,8 +100,8 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 
   public void create(ContactData contact) {
