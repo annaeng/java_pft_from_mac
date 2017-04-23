@@ -23,9 +23,11 @@ public class NavigationHelper extends HelperBase {
       click(By.linkText("groups"));
     }
 
-    //WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-
-
+  public void goToHomePage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home page"));
+  }
 
 }
-

@@ -5,13 +5,10 @@ import ch.stqa.pft.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,10 +29,10 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
-    type(By.name("mobile"), contactData.getMobil());
+    type(By.name("mobile"), contactData.getMobilePhone());
 
     if (creation) {
-     // new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      // new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -70,7 +67,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void editContact(int index) {
@@ -78,11 +75,12 @@ public class ContactHelper extends HelperBase {
   }
 
   public void editContactById(int id) {
-    wd.findElement(By.xpath("//a[@href='edit.php?id="+id+"']")).click();
+    wd.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
     //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
-  public void updateContact() { click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+  public void updateContact() {
+    click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     WebDriver.Timeouts timeouts = wd.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
   }
 
@@ -120,13 +118,13 @@ public class ContactHelper extends HelperBase {
   }
 
   public List<ContactData> list() {
-    List<ContactData> contacts= new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements( By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']") );
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']"));
 
     for (WebElement element : elements) {
-      String firstname = element.findElement( By.xpath(".//td[3]")).getText();
-      String lastname = element.findElement( By.xpath(".//td[2]")).getText();
-      int id = Integer.parseInt(element.findElement(By.xpath( ".//td[@class='center']/input")).getAttribute("value"));
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']/input")).getAttribute("value"));
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
@@ -136,21 +134,57 @@ public class ContactHelper extends HelperBase {
 
   public Contacts all() {
     if (contactCash != null) {
-      return  new Contacts(contactCash);
+      return new Contacts(contactCash);
     }
 
     contactCash = new Contacts();
-    List<WebElement> elements = wd.findElements( By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']") );
+    List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']"));
 
     for (WebElement element : elements) {
-      String firstname = element.findElement( By.xpath(".//td[3]")).getText();
-      String lastname = element.findElement( By.xpath(".//td[2]")).getText();
-      int id = Integer.parseInt(element.findElement(By.xpath( ".//td[@class='center']/input")).getAttribute("value"));
-      contactCash.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']/input")).getAttribute("value"));
+      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
+      contactCash.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return new Contacts(contactCash);
   }
 
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    // Выходим из формы редактирования Контакта
+    wd.navigate().back();
+    // возвращаем предварительно заполненный список полей Контакта (множество значений) в таблицу контактов
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+  }
+
+  //  это варианты выбора контакта по заданному иденитификатору
+  public void initContactModificationById(int id) {
+    // метод последовательных приближений
+    // ищем checkbox
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    // Вверх на 2 уровня чтобы посчитать колонки td т.е. идём  к родителю tr
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    // Получаем список (множество) td
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    // Выбираем нужную колонку (8 номер счет идет от 0)
+    cells.get(7).findElement(By.tagName("a")).click();
+  }
+  // примеры:
+  //  wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a",id))).click();
+  //  wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
+  //  wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
+
 }
+
+
+
 
 
