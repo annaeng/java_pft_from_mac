@@ -7,25 +7,52 @@ public class ContactData {
   private String lastname;
   private String group;
   private String address;
+  private String new_adress;
   private String mobil;
-  private String homePhone;
   private String mobilePhone;
+  private String homePhone;
   private String workPhone;
   private String allPhones;
-  private String new_adress;
   private String email1;
   private String email2;
   private String email3;
   private String allEmails;
 
-  public ContactData withEmail1(String email1) {
-    this.email1 = email1;
-    return this;
+
+  public int getId() {return id;}
+
+  public String getFirstname() {
+    return firstname;
   }
 
-  public ContactData withEmail2(String email2) {
-    this.email2 = email2;
-    return this;
+  public String getLastname() {
+    return lastname;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public String getNew_adress() {
+    return new_adress;
+  }
+
+  public String getMobil() {
+    return mobil;
+  }
+
+  public String getMobilePhone() { return mobilePhone; }
+
+  public String getHomePhone() { return homePhone; }
+
+  public String getWorkPhone() { return workPhone; }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
   public String getEmail1() {
@@ -40,62 +67,10 @@ public class ContactData {
     return email3;
   }
 
-  public ContactData withEmail3(String email3) {
-    this.email3 = email3;
-    return this;
-  }
-
-
-  public ContactData withAllEmails(String allEmails) {
-    this.allEmails = allEmails;
-    return this;
-  }
-
   public String getAllEmails() {
     return allEmails;
   }
 
-  public ContactData withNew_adress(String new_adress) {
-    this.new_adress = new_adress;
-    return this;
-  }
-  public String getNew_adress() {
-    return new_adress;
-  }
-
-  public String getAllPhones() {
-    return allPhones;
-  }
-
-  public ContactData withAllPhones(String allPhones) {
-    this.allPhones = allPhones;
-    return this;
-  }
-
-
-
-  public String getWorkPhone() { return workPhone; }
-
-  public  ContactData withWorkPhone (String workPhone) {
-    this.workPhone = workPhone;
-    return this;
-  }
-
-  public String getMobilePhone() { return mobilePhone; }
-
-  public  ContactData withMobilePhone (String mobilePhone) {
-    this.mobilePhone = mobilePhone;
-    return this;
-  }
-
-  public String getHomePhone() { return homePhone; }
-
-  public  ContactData withHomePhone (String homePhone) {
-    this.homePhone = homePhone;
-    return this;
-  }
-
-  public int getId() {return id;}
 
   public ContactData withId(int id) {
     this.id = id;
@@ -107,47 +82,59 @@ public class ContactData {
     return this;
 
   }
-
   public ContactData withLastname(String lastname) {
     this.lastname = lastname;
     return this;
   }
-
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
   public ContactData withAddress(String address) {
     this.address = address;
     return this;
   }
-
+  public ContactData withNew_adress(String new_adress) {
+    this.new_adress = new_adress;
+    return this;
+  }
 
   public ContactData withMobil(String mobil) {
     this.mobil = mobil;
     return this;
   }
-
-
-  public ContactData withGroup(String group) {
-    this.group = group;
+  public ContactData withMobilePhone (String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+  public ContactData withHomePhone (String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+  public ContactData withWorkPhone (String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 
-  public String getFirstname() {
-    return firstname;
+  public ContactData withEmail1(String email1) {
+    this.email1 = email1;
+    return this;
   }
-
-  public String getLastname() {
-    return lastname;
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
   }
-
-  public String getAddress() {
-    return address;
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
   }
-
-  public String getMobil() {
-    return mobil;
-  }
-
-  public String getGroup() {
-    return group;
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
   }
 
 
@@ -160,7 +147,19 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (group != null ? !group.equals(that.group) : that.group != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (mobil != null ? !mobil.equals(that.mobil) : that.mobil != null) return false;
+    if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
+    if (mobilePhone != null ? !mobilePhone.equals(that.mobilePhone) : that.mobilePhone != null) return false;
+    if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
+    if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
+    if (new_adress != null ? !new_adress.equals(that.new_adress) : that.new_adress != null) return false;
+    if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
+    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+    if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+    return allEmails != null ? allEmails.equals(that.allEmails) : that.allEmails == null;
   }
 
   @Override
@@ -168,14 +167,39 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (mobil != null ? mobil.hashCode() : 0);
+    result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
+    result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
+    result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
+    result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
+    result = 31 * result + (new_adress != null ? new_adress.hashCode() : 0);
+    result = 31 * result + (email1 != null ? email1.hashCode() : 0);
+    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+    result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", group='" + group + '\'' +
+            ", address='" + address + '\'' +
+            ", mobil='" + mobil + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", new_adress='" + new_adress + '\'' +
+            ", email1='" + email1 + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", allEmails='" + allEmails + '\'' +
             '}';
   }
 

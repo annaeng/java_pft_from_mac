@@ -120,7 +120,6 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name='entry']"));
-
     for (WebElement element : elements) {
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
@@ -145,24 +144,29 @@ public class ContactHelper extends HelperBase {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']/input")).getAttribute("value"));
       String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+      String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
       contactCash.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones));
+              .withAllPhones(allPhones).withAllEmails(allEmails));
     }
     return new Contacts(contactCash);
   }
 
   public ContactData infoFromEditForm(ContactData contact) {
+
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
     String home = wd.findElement(By.name("home")).getAttribute("value");
-    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     // Выходим из формы редактирования Контакта
     wd.navigate().back();
     // возвращаем предварительно заполненный список полей Контакта (множество значений) в таблицу контактов
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail1(email).withEmail2(email2).withEmail3(email3);
   }
 
   //  это варианты выбора контакта по заданному иденитификатору
