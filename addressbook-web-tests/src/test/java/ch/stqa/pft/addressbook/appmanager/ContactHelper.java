@@ -142,11 +142,14 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elements) {
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String address = element.findElement(By.xpath(".//td[4]")).getText();
       int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']/input")).getAttribute("value"));
       String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
       String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
-      contactCash.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allPhones).withAllEmails(allEmails));
+      //String allDetails = firstname + lastname + address + allPhones + allEmails;
+      String allDetails = firstname + "\n" + lastname + "\n" + address + "\n" + allPhones + "\n" + allEmails;
+      contactCash.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address)
+              .withAllPhones(allPhones).withAllEmails(allEmails).withAllDetails(allDetails));
     }
     return new Contacts(contactCash);
   }
@@ -156,17 +159,20 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
     String home = wd.findElement(By.name("home")).getAttribute("value");
-    String work = wd.findElement(By.name("work")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String allDetails = contact.getId() +"\n" + firstname + "\n" + lastname + "\n" + address + "\n" + home + "\n" + mobile  + "\n" + work + "\n" + email + "\n" + email2 +"\n" + email3;
     // Выходим из формы редактирования Контакта
     wd.navigate().back();
     // возвращаем предварительно заполненный список полей Контакта (множество значений) в таблицу контактов
-    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail1(email).withEmail2(email2).withEmail3(email3);
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withAddress(address)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+            .withEmail1(email).withEmail2(email2).withEmail3(email3).withAllDetails(allDetails);
   }
 
   //  это варианты выбора контакта по заданному иденитификатору
@@ -185,6 +191,22 @@ public class ContactHelper extends HelperBase {
   //  wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a",id))).click();
   //  wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
   //  wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
+
+  public ContactData infoFromDetails(ContactData contact) {
+    initContactDetailsById(contact.getId());
+    String allDetails = wd.findElement(By.cssSelector("#content")).getText();
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withAllDetails(allDetails);
+  }
+
+  private void initContactDetailsById(int id) {
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(6).findElement(By.tagName("a")).click();
+  }
+
+
 
 }
 
