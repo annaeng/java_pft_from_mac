@@ -3,13 +3,15 @@ package ch.stqa.pft.addressbook.tests;
 import ch.stqa.pft.addressbook.model.ContactData;
 import ch.stqa.pft.addressbook.model.Contacts;
 import ch.stqa.pft.addressbook.model.GroupData;
+import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,13 +19,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTest extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validContacts() {
+  public Iterator<Object[]> validContacts() throws IOException {
     File photo = new File("src/test/resources/stru.png");
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new ContactData().withFirstname("FN1").withLastname("LN1").withAddress("Happy st.1").withMobilePhone("1111").withPhoto(photo)});
-    list.add(new Object[] {new ContactData().withFirstname("FN2").withLastname("LN2").withAddress("Happy st.2").withMobilePhone("2222").withPhoto(photo)});
-    list.add(new Object[] {new ContactData().withFirstname("FN3").withLastname("LN3").withAddress("Happy st.3").withMobilePhone("3333").withPhoto(photo)});
-    return list.iterator();
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+    String xml = "";
+    String line = reader.readLine();
+    while (line != null) {
+      xml += line;
+      line = reader.readLine();
+    }
+    XStream xstream = new XStream();
+    xstream.processAnnotations(ContactData.class);
+    List<ContactData> contacts = (List<ContactData>)xstream.fromXML(xml);
+    return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
   }
 
   @Test (dataProvider = "validContacts")
