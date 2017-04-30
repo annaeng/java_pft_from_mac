@@ -9,6 +9,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.3.1'
     compile 'org.webjars.bower:marionette:3.2.0'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
+    compile 'com.beust:jcommander:1.69'
 }
 
 //после каждого изменения (не смотря на автосинхронизвцию) сохранять в ручную: View -> Tool Windows -> Gradel -> Sync
