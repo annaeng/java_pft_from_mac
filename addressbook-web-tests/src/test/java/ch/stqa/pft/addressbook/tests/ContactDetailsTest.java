@@ -27,24 +27,32 @@ public class ContactDetailsTest extends TestBase {
   public void testContactDetails() {
     app.goTo().goToHomePage();
     ContactData contact = app.contact().all().iterator().next();
-    ContactData allDetails = app.contact().infoFromDetails(contact);
-    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    ContactData contactInfoDetails = app.contact().infoFromDetails(contact);
+    ContactData contactInfoEdit = app.contact().infoFromEdit(contact);
 
-    assertThat(contact.getAllDetails(), equalTo(mergeDetails(contactInfoFromEditForm)));
-    assertThat(allDetails.getAllDetails(), equalTo(mergeDetails(contactInfoFromEditForm)));
-    //assertThat(mergeDetails(allDetails), equalTo(mergeDetails(contactInfoFromEditForm)));
+    //assertThat(contact.getAllDetails(), equalTo(mergeEdit(contactInfoEdit)));
+    assertThat(mergeDetails(contactInfoDetails), equalTo(mergeEdit(contactInfoEdit)));
 
   }
 
-  private String mergeDetails(ContactData contact) {
-    return Arrays.asList(contact.getFirstname(), contact.getLastname(), contact.getAddress(),
-            contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
-            contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
+  private String mergeEdit(ContactData contactInfoEdit) {
+    return Arrays.asList(contactInfoEdit.getFirstname(), contactInfoEdit.getLastname(), contactInfoEdit.getAddress(),
+            contactInfoEdit.getHomePhone(), contactInfoEdit.getMobilePhone(), contactInfoEdit.getWorkPhone(),
+            contactInfoEdit.getEmail1(), contactInfoEdit.getEmail2(), contactInfoEdit.getEmail3())
             .stream()
             .filter((s) -> !(s == null || s.equals("")))
             .map(ContactDetailsTest::cleaned)
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining(""));
   }
+
+  private String mergeDetails(ContactData contactInfoDetails) {
+    return Arrays.asList(contactInfoDetails.getAllDetails())
+            .stream()
+            .filter((s) -> !(s == null || s.equals("")))
+            .map(ContactDetailsTest::cleaned)
+            .collect(Collectors.joining(""));
+  }
+
 
   public static String cleaned(String data) {
     return data.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("H:", "").replaceAll("M:", "").replaceAll("W:", "");

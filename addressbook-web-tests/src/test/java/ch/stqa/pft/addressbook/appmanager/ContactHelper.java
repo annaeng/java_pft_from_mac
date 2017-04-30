@@ -154,7 +154,7 @@ public class ContactHelper extends HelperBase {
     return new Contacts(contactCash);
   }
 
-  public ContactData infoFromEditForm(ContactData contact) {
+  public ContactData infoFromEdit(ContactData contact) {
 
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -166,7 +166,7 @@ public class ContactHelper extends HelperBase {
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
-    String allDetails = contact.getId() +"\n" + firstname + "\n" + lastname + "\n" + address + "\n" + home + "\n" + mobile  + "\n" + work + "\n" + email + "\n" + email2 +"\n" + email3;
+    String allDetails = contact.getId() +"\n" + firstname +"\n" + lastname +"\n" +  address +"\n" +  home +"\n" +  mobile  +"\n" +  work +"\n" +  email +"\n" +  email2 +"\n" + email3;
     // Выходим из формы редактирования Контакта
     wd.navigate().back();
     // возвращаем предварительно заполненный список полей Контакта (множество значений) в таблицу контактов
@@ -205,7 +205,6 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(6).findElement(By.tagName("a")).click();
   }
-
 
 
 }
