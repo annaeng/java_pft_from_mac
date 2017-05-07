@@ -13,6 +13,18 @@ dependencies {
     compile 'com.thoughtworks.xstream:xstream:1.4.9'
 }
 
+task testGroups (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngGroups.xml'
+    }
+}
+
+task testContacts (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngContacts.xml'
+    }
+}
+
 //после каждого изменения (не смотря на автосинхронизвцию) сохранять в ручную: View -> Tool Windows -> Gradel -> Sync
 // ссылка на структуру файла: https://docs.gradle.org/current/userguide/userguide.html  где то тут
 // сайт где находится библиотека тестового framework TestNG: search.maven.org разные сборщики исп. разный формат описания зависимотей,

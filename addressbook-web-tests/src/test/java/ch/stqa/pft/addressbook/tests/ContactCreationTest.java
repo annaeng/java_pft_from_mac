@@ -3,6 +3,7 @@ package ch.stqa.pft.addressbook.tests;
 import ch.stqa.pft.addressbook.model.ContactData;
 import ch.stqa.pft.addressbook.model.Contacts;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,6 +20,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase {
+
+  @BeforeTest
+  public void home () {
+    app.goTo().clickHomePage();
+  }
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
@@ -37,6 +43,7 @@ public class ContactCreationTest extends TestBase {
       return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
+
 
   @Test(dataProvider = "validContacts")
   public void testContactCreation(ContactData contact) {

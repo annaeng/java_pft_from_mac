@@ -23,11 +23,15 @@ public class NavigationHelper extends HelperBase {
       click(By.linkText("groups"));
     }
 
-  public void goToHomePage() {
+  public void HomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
+  }
+  public void clickHomePage() {
+    click(By.xpath(".//*[@id='nav']/ul/li[1]/a"));
+    //click(By.linkText("home"));
   }
 
 }

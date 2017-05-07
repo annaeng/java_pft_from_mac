@@ -86,17 +86,23 @@ public class ContactHelper extends HelperBase {
   }
 
   public void goToAddNewContact() {
-    if (isElementPresent(By.name("submit"))) {
-      return;
-    }
-    click(By.linkText("add new"));
+      if (isElementPresent(By.name("submit"))) {
+        return;
+      }
+    //click(By.linkText("add new"));
+    click(By.xpath(".//*[@id='nav']/ul/li[2]/a"));
   }
+  public void clickAddNewContact() {
+    //click(By.linkText("add new"));
+    click(By.xpath(".//*[@id='nav']/ul/li[2]/a"));
+  }
+
 
   public void goToHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 
   public int count() {
@@ -104,7 +110,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void create(ContactData contact) {
-    goToAddNewContact();
+    clickAddNewContact();
+    //goToAddNewContact();
     fillNewContact(contact, true);
     submitNewContact();
     contactCash = null;

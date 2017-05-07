@@ -3,6 +3,7 @@ package ch.stqa.pft.addressbook.tests;
 import ch.stqa.pft.addressbook.model.ContactData;
 import ch.stqa.pft.addressbook.model.Contacts;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,6 +14,11 @@ import static org.testng.Assert.assertEquals;
  * Created by annaryapolova on 08.04.17.
  */
 public class ContactModificationTests extends TestBase {
+
+  @BeforeTest
+  public void home () {
+    app.goTo().clickHomePage();
+  }
 
   @BeforeMethod
   public void ensurePreconditions() {
