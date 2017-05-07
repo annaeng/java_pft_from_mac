@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by annaryapolova on 08.04.17.
  */
-public class ContactModificationTests extends TestBase {
+public class ContactModificationTest extends TestBase {
 
   @BeforeTest
   public void home () {
