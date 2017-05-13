@@ -26,6 +26,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${browser}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
 }
 
 task testContacts(type: Test) {
@@ -38,7 +41,11 @@ task testContacts(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${browser}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
 }
+
 
 //после каждого изменения (не смотря на автосинхронизвцию) сохранять в ручную: View -> Tool Windows -> Gradel -> Sync
 // ссылка на структуру файла: https://docs.gradle.org/current/userguide/userguide.html  где то тут

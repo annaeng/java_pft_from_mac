@@ -213,6 +213,9 @@ public class ContactData {
     return this;
   }
 
+
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -252,6 +255,7 @@ public class ContactData {
     result = 31 * result + (allDetails != null ? allDetails.hashCode() : 0);
     return result;
   }
+
 
   @Override
   public String toString() {

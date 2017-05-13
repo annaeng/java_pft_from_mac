@@ -34,7 +34,7 @@ public class ContactDetailsTest extends TestBase {
 
     //assertThat(contact.getAllDetails(), equalTo(mergeEdit(contactInfoEdit)));
     assertThat(mergeDetails(contactInfoDetails), equalTo(mergeEdit(contactInfoEdit)));
-
+    verifyContactListInUI ();
   }
 
   private String mergeEdit(ContactData contactInfoEdit) {
