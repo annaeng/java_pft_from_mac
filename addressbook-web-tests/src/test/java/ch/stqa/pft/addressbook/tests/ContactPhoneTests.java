@@ -19,7 +19,8 @@ public class ContactPhoneTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.contact().list().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().clickHomePage();
       app.contact().create(new ContactData().
               withFirstname("FN77").withLastname("LN77").withAddress("Happy st.77").withMobilePhone("777777777").withGroup("о, святые печеньки1"));
     }
@@ -28,8 +29,8 @@ public class ContactPhoneTests extends TestBase {
   @Test
   //(enabled = false)
   public void testContactPhones() {
-    app.goTo().HomePage();
     ContactData contact = app.contact().all().iterator().next();
+    app.goTo().HomePage();
     ContactData contactInfoFromEditForm = app.contact().infoFromEdit(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
