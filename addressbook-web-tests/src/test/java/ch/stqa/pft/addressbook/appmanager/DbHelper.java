@@ -39,11 +39,75 @@ public class DbHelper {
   public Contacts contacts() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<ContactData> result = session.createQuery( "from ContactData where deprecated = 0000-00-00  ").list();
+    List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'  ").list();
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
+  }
+//убрать
+  public Groups contactsWithGroups() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'   ").list();
+    session.getTransaction().commit();
+    session.close();
 
+    for (ContactData contact : result) {
+      return new Groups(contact.getGroups());
+    }
+
+    return null;
+  }
+
+  public ContactData contactById(Integer id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery( "from ContactData where id = '" + id + "'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return result.get(0);
+  }
+
+  public ContactData contactById2(Integer id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery( "from ContactData where id = '" + id + "'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return result.get(0);
+  }
+
+  public GroupData groupByName(String groupName) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<GroupData> result = session.createQuery( "from GroupData where group_name = '" + groupName + "'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return result.get(0);
+  }
+
+  public Contacts contactsInGroupByName(String groupName) {
+    Contacts actualContactsInGroup = new Contacts(); //Сюда будем складывать контакты, которые существуют на данный момент и входят в требуемую группу
+
+    Contacts allContactsInGroup = groupByName(groupName).getContacts(); // Все контакты, которые в группе (существующие и уже удаленные из приложения)
+
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+
+    for (ContactData contact : allContactsInGroup) {
+      // Проверка существует ли сейчас этот контакт
+      List<ContactData> resultOfActualityContact = session.createQuery("from ContactData where id = '" + contact.getId()
+              + "' and deprecated = '0000-00-00'").list();
+      // Если существует, то добавим его
+      if (resultOfActualityContact.size() == 1) {
+        actualContactsInGroup.add(resultOfActualityContact.get(0));
+      }
+    }
+
+    session.getTransaction().commit();
+    session.close();
+
+    return actualContactsInGroup;
   }
 
 

@@ -2,9 +2,11 @@ package ch.stqa.pft.addressbook.appmanager;
 
 import ch.stqa.pft.addressbook.model.ContactData;
 import ch.stqa.pft.addressbook.model.Contacts;
+import ch.stqa.pft.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -92,6 +94,7 @@ public class ContactHelper extends HelperBase {
     //click(By.linkText("add new"));
     click(By.xpath(".//*[@id='nav']/ul/li[2]/a"));
   }
+
   public void clickAddNewContact() {
     //click(By.linkText("add new"));
     click(By.xpath(".//*[@id='nav']/ul/li[2]/a"));
@@ -214,6 +217,28 @@ public class ContactHelper extends HelperBase {
     cells.get(6).findElement(By.tagName("a")).click();
   }
 
+  public void addContactToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectGroupInList(group.getName());
+    initAddToGroup();
+  }
+
+  private void selectGroupInList(String groupName) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName);
+  }
+
+  private void initAddToGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void deleteContactFromGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    initDeletingFromGrop();
+  }
+
+  private void initDeletingFromGrop() {
+    wd.findElement(By.name("remove")).click();
+  }
 
 }
 

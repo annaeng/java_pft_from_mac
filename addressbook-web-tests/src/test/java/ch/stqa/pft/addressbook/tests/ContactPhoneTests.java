@@ -21,8 +21,10 @@ public class ContactPhoneTests extends TestBase {
   public void ensurePreconditions() {
     if (app.db().contacts().size() == 0) {
       app.goTo().clickHomePage();
-      app.contact().create(new ContactData().
-              withFirstname("FN77").withLastname("LN77").withAddress("Happy st.77").withMobilePhone("777777777").withGroup("о, святые печеньки1"));
+      app.contact().create(new ContactData()
+              .withFirstname("FN77").withLastname("LN77").withAddress("Happy st.77").withMobilePhone("777777777")
+              //.withGroup("о, святые печеньки1")
+      );
     }
   }
 
