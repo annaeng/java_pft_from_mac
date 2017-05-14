@@ -79,8 +79,6 @@ public class ContactData {
   @Type(type = "text")
   private String photo;
 
-  //@Transient
-  //private String group;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
@@ -90,8 +88,6 @@ public class ContactData {
   public File getPhoto() {
     return new File(photo);
   }
-
-
   public int getId() {return id;}
 
   public String getFirstname() {
@@ -105,9 +101,6 @@ public class ContactData {
   }
   public String getAddress() {
     return address;
-  }
-  public String getNew_adress() {
-    return new_adress;
   }
 
   public String getMobil() {
@@ -142,17 +135,17 @@ public class ContactData {
     return allDetails;
   }
 
+
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
   }
 
-
-
   public ContactData withId(int id) {
     this.id = id;
     return this;
   }
+
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
@@ -166,13 +159,8 @@ public class ContactData {
     this.nickName = nickName;
     return this;
   }
-
   public ContactData withAddress(String address) {
     this.address = address;
-    return this;
-  }
-  public ContactData withNew_adress(String new_adress) {
-    this.new_adress = new_adress;
     return this;
   }
 
@@ -218,8 +206,6 @@ public class ContactData {
     this.allDetails = allDetails;
     return this;
   }
-
-
 
 
   @Override
