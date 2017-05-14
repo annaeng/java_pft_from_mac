@@ -24,10 +24,18 @@ public class DeleteContactFromGroup extends TestBase {
       app.contact().create(new ContactData().withFirstname("FN").withLastname("LN"));
     }
 
-    // Если нет ни одной группы - создадим
+    // Если нет ни одной группы создадём
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
+    }
+
+
+    // Если нет ни одного контакта - создаём контакт, сразу включив его в какую-то группу
+    if (app.db().contacts().size() == 0) {
+      Groups groups = app.db().groups();
+      app.contact().clickAddNewContact();
+      app.contact().create(new ContactData().withFirstname("FN").withLastname("LN").inGroup(groups.iterator().next()));
     }
   }
 
@@ -42,7 +50,7 @@ public class DeleteContactFromGroup extends TestBase {
 
 
     app.goTo().clickHomePage();
-    app.contact().deleteContactFromGroup(contact);
+    app.contact().deleteContactFromGroup(contact, group);
 
 
     Contacts groupContactsAfter = app.db().contactsInGroupByName(group.getName());

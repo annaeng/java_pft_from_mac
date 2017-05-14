@@ -69,10 +69,6 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
-  }
-
   public void editContact(int index) {
     wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[*]/td[8]/a/img")).get(index).click();
   }
@@ -99,7 +95,6 @@ public class ContactHelper extends HelperBase {
     //click(By.linkText("add new"));
     click(By.xpath(".//*[@id='nav']/ul/li[2]/a"));
   }
-
 
   public void goToHomePage() {
     if (isElementPresent(By.id("maintable"))) {
@@ -210,13 +205,6 @@ public class ContactHelper extends HelperBase {
     return new ContactData().withId(contact.getId()).withAllDetails(allDetails);
   }
 
-  private void initContactDetailsById(int id) {
-    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
-    WebElement row = checkbox.findElement(By.xpath("./../.."));
-    List<WebElement> cells = row.findElements(By.tagName("td"));
-    cells.get(6).findElement(By.tagName("a")).click();
-  }
-
   public void addContactToGroup(ContactData contact, GroupData group) {
     selectContactById(contact.getId());
     selectGroupInList(group.getName());
@@ -231,13 +219,34 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.name("add")).click();
   }
 
-  public void deleteContactFromGroup(ContactData contact) {
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  private void initContactDetailsById(int id) {
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(6).findElement(By.tagName("a")).click();
+  }
+
+  public void deleteContactFromGroup(ContactData contact, GroupData group) {
+
+    initContactDetailsById(contact.getId());
+    clickMemberOfGroup();
     selectContactById(contact.getId());
     initDeletingFromGrop();
   }
 
   private void initDeletingFromGrop() {
     wd.findElement(By.name("remove")).click();
+  }
+
+  private void clickMemberOfGroup() {
+    //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']"))).click();
+    wd.findElement(By.xpath("//div/div[4]/i/a")).click();
+
+            // wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
   }
 
 }
